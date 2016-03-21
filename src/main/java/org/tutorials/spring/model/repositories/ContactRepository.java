@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactRepository {
     private DataSource dataSource;
@@ -19,7 +21,7 @@ public class ContactRepository {
         try {
             Context context = new InitialContext();
             try {
-                dataSource = (DataSource) context.lookup("java:comp/env/jdbc/jndi");
+                dataSource = (DataSource) context.lookup("java:comp/env/jdbc/addressbook");
             } finally {
                 context.close();
             }
@@ -31,7 +33,7 @@ public class ContactRepository {
     public void init() {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "CREATE TABLE IF NOT EXISTS contact (id INTEGER PRIMARY KEY Auto_increment,name VARCHAR (255),address_id INTEGER ,FOREIGN KEY (address_id) REFERENCES address)";
+            String sql = "CREATE TABLE IF NOT EXISTS contact (id INTEGER PRIMARY KEY Auto_increment,name VARCHAR (255),address_id INTEGER ,FOREIGN KEY (address_id) REFERENCES address(id))";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.execute();
             preparedStatement.close();
@@ -42,7 +44,7 @@ public class ContactRepository {
         }
     }
 
-    public Contact find(long id)  {
+    public Contact find(long id) {
         Contact contact = new Contact();
         try {
             Connection connection = dataSource.getConnection();
@@ -52,9 +54,7 @@ public class ContactRepository {
             if (!resultSet.next()) {
                 return null;
             } else {
-                contact.setId(resultSet.getLong("id"));
-                contact.setName(resultSet.getString("address"));
-                contact.setAddressId(resultSet.getString("address_id"));
+                contact = unmarshal(resultSet);
                 resultSet.close();
                 preparedStatement.close();
                 connection.close();
@@ -62,15 +62,30 @@ public class ContactRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return contact ;
+        return contact;
+    }
+
+    public List<Contact> findAll() {
+        ArrayList<Contact> list = new ArrayList<Contact>();
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from contact");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(unmarshal(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public void create(Contact contact) {
         try {
-            Connection connection = dataSource.getConnection() ;
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO contact () VALUES (?,?)");
-            preparedStatement.setString(1,contact.getName());
-            preparedStatement.setString(2,contact.getAddressId());
+            preparedStatement.setString(1, contact.getName());
+            preparedStatement.setString(2, contact.getAddressId());
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();
@@ -81,11 +96,11 @@ public class ContactRepository {
 
     public void update(Contact contact) {
         try {
-            Connection connection = dataSource.getConnection() ;
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE contact set name=?,address_id=?WHERE id=?");
-            preparedStatement.setString(1,contact.getName());
-            preparedStatement.setString(2,contact.getAddressId());
-            preparedStatement.setLong(3,contact.getId());
+            preparedStatement.setString(1, contact.getName());
+            preparedStatement.setString(2, contact.getAddressId());
+            preparedStatement.setLong(3, contact.getId());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
@@ -96,9 +111,9 @@ public class ContactRepository {
 
     public void delete(long id) {
         try {
-            Connection connection = dataSource.getConnection() ;
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM contact WHERE  id=?");
-            preparedStatement.setLong(1,id);
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();
@@ -109,7 +124,7 @@ public class ContactRepository {
 
     public void truncate() {
         try {
-            Connection connection = dataSource.getConnection() ;
+            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("TRUNCATE address");
             preparedStatement.execute();
             preparedStatement.close();
@@ -117,5 +132,17 @@ public class ContactRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Contact unmarshal(ResultSet resultSet) {
+        Contact contact = new Contact();
+        try {
+            contact.setId(resultSet.getLong("id"));
+            contact.setName(resultSet.getString("name"));
+            contact.setAddressId(resultSet.getString("address_id"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contact;
     }
 }

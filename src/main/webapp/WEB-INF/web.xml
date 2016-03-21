@@ -13,7 +13,7 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     
-    <listener>
+    <!--<listener>
         <listener-class>org.tutorials.spring.servlet.InitializeApplication</listener-class>
-    </listener>
+    </listener>-->
 </web-app>

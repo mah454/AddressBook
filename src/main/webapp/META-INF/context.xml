@@ -2,7 +2,7 @@
 <Context>
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
 
-<Resource name="jdbc/jndi"
+<Resource name="jdbc/addressbook"
           auth="Container"
           type="javax.sql.DataSource"
           maxTotal="100"
@@ -11,5 +11,5 @@
           username="mahsom"
           password="mypass"
           driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://172.17.0.2:3306/jndi"/>
+          url="jdbc:mysql://172.17.0.2:3306/addressbook"/>
 </Context>
