@@ -1,11 +1,19 @@
 package org.tutorials.spring.model.entities;
 
+import javax.persistence.*;
+
 /**
  * Created by mahsom on 3/21/16.
  */
+@Entity
 public class Contact {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+
+    //TODO Relation OneToOne ...
     private Long addressId;
 
     public Contact() {

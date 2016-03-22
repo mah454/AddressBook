@@ -1,7 +1,5 @@
 package org.tutorials.spring.model.repositories;
 
-import org.tutorials.spring.model.entities.Address;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.util.List;
@@ -19,18 +17,24 @@ public class Repository<E> {
     }
 
     public List<E> findAll() {
-        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
+        return entityManager.createQuery("from " + entityClass.getSimpleName() + " order by id", entityClass).getResultList();
     }
 
     public void save(E entity) {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
     }
 
     public void update(E entity) {
+        entityManager.getTransaction().begin();
         entityManager.merge(entity);
+        entityManager.getTransaction().commit();
     }
 
     public void delete(E entity) {
+        entityManager.getTransaction().begin();
         entityManager.remove(entity);
+        entityManager.getTransaction().commit();
     }
 }

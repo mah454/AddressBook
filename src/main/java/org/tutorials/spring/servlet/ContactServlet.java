@@ -24,7 +24,8 @@ public class ContactServlet extends HttpServlet {
         } else {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getId());
+            Address address = addressRepository.find(contact.getAddressId());
+            System.out.println(address.getCity());
             req.setAttribute("contact", contact);
             req.setAttribute("address", address);
             if (req.getParameter("edit") != null) {
@@ -52,7 +53,7 @@ public class ContactServlet extends HttpServlet {
         } else if (req.getParameter("edit") != null) {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getId());
+            Address address = addressRepository.find(contact.getAddressId());
             contact.setName(req.getParameter("name"));
             address.setState(req.getParameter("state"));
             address.setCity(req.getParameter("city"));
@@ -64,7 +65,7 @@ public class ContactServlet extends HttpServlet {
         } else if (req.getParameter("delete")!=null) {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getId());
+            Address address = addressRepository.find(contact.getAddressId());
             contactRepository.delete(contact);
             addressRepository.delete(address);
             resp.sendRedirect("contacts.do");

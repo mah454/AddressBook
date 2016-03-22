@@ -1,9 +1,15 @@
 package org.tutorials.spring.model.entities;
 
+import javax.persistence.*;
+
 /**
  * Created by mahsom on 3/21/16.
  */
+@Entity
 public class Address {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id ;
     private String street ;
     private String city ;
