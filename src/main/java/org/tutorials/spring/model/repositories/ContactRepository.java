@@ -131,18 +131,6 @@ public class ContactRepository {
         }
     }
 
-    public void truncate() {
-        try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("TRUNCATE address");
-            preparedStatement.execute();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static Contact unmarshal(ResultSet resultSet) {
         Contact contact = new Contact();
         try {

@@ -125,20 +125,8 @@ public class AddressRepository {
     public void delete(long id) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM address WHERE  id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM address WHERE id=?");
             preparedStatement.setLong(1, id);
-            preparedStatement.execute();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void truncate() {
-        try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("TRUNCATE address");
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();
