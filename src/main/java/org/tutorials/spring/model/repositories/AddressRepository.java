@@ -75,7 +75,7 @@ public class AddressRepository {
         ArrayList<Address> list = new ArrayList<Address>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from address");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from address ORDER BY id");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(unmarshal(resultSet));

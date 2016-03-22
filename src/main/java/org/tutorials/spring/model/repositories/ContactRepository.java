@@ -75,7 +75,7 @@ public class ContactRepository {
         ArrayList<Contact> list = new ArrayList<Contact>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from contact");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from contact ORDER BY id");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(unmarshal(resultSet));

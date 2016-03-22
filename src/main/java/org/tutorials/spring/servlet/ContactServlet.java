@@ -22,13 +22,16 @@ public class ContactServlet extends HttpServlet {
         if (req.getParameter("add") != null) {
             req.getRequestDispatcher("addContact.jsp").forward(req, resp);
         } else {
-            long id= Long.parseLong(req.getParameter("id"));
+            long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
             Address address = addressRepository.find(contact.getId());
-            req.setAttribute("contact",contact);
-            req.setAttribute("address",address);
-            req.getRequestDispatcher("viewContact.jsp").forward(req,resp);
-
+            req.setAttribute("contact", contact);
+            req.setAttribute("address", address);
+            if (req.getParameter("edit") != null) {
+                req.getRequestDispatcher("editContact.jsp").forward(req, resp);
+            } else {
+                req.getRequestDispatcher("viewContact.jsp").forward(req, resp);
+            }
         }
     }
 
@@ -45,7 +48,19 @@ public class ContactServlet extends HttpServlet {
             contact.setName(req.getParameter("name"));
             contact.setAddressId(address.getId());
             contactRepository.create(contact);
-            resp.sendRedirect("/contacts.do");
+            resp.sendRedirect("/contact.do?id=" + contact.getId());
+        } else if (req.getParameter("edit") != null) {
+            long id = Long.parseLong(req.getParameter("id"));
+            Contact contact = contactRepository.find(id);
+            Address address = addressRepository.find(contact.getId());
+            contact.setName(req.getParameter("name"));
+            address.setState(req.getParameter("state"));
+            address.setCity(req.getParameter("city"));
+            address.setStreet(req.getParameter("street"));
+            address.setZip(req.getParameter("zip"));
+            contactRepository.update(contact);
+            addressRepository.update(address);
+            resp.sendRedirect("contact.do?id="+contact.getId());
         } else {
             super.doPost(req, resp);
         }

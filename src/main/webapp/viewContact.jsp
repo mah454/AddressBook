@@ -18,6 +18,6 @@
     <li>${address.street}</li>
     <li>${address.zip}</li>
 </ul>
-<a href="/contacts.do">Back to contact list</a>
+<a href="/contact.do?edit&id=${contact.id}">Edit Contact</a> | <a href="/contacts.do">Back to contact list</a>
 </body>
 </html>
