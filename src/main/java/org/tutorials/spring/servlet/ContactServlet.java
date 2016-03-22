@@ -43,11 +43,11 @@ public class ContactServlet extends HttpServlet {
             address.setCity(req.getParameter("city"));
             address.setStreet(req.getParameter("street"));
             address.setZip(req.getParameter("zip"));
-            addressRepository.create(address);
+            addressRepository.save(address);
             Contact contact = new Contact();
             contact.setName(req.getParameter("name"));
             contact.setAddressId(address.getId());
-            contactRepository.create(contact);
+            contactRepository.save(contact);
             resp.sendRedirect("/contact.do?id=" + contact.getId());
         } else if (req.getParameter("edit") != null) {
             long id = Long.parseLong(req.getParameter("id"));
