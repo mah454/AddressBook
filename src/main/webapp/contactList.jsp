@@ -21,7 +21,7 @@
     <c:forEach var="contact" items="${contacts}">
         <tr>
             <th><c:out value="${contact.id}"/></th>
-            <th><c:out value="${contact.name}"/></th>
+            <th><a href="/contact.do?id=${contact.id}"><c:out value="${contact.name}"/></a></th>
         </tr>
     </c:forEach>
 </table>

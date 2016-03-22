@@ -22,8 +22,13 @@ public class ContactServlet extends HttpServlet {
         if (req.getParameter("add") != null) {
             req.getRequestDispatcher("addContact.jsp").forward(req, resp);
         } else {
-            //TODO
-            super.doGet(req, resp);
+            long id= Long.parseLong(req.getParameter("id"));
+            Contact contact = contactRepository.find(id);
+            Address address = addressRepository.find(contact.getId());
+            req.setAttribute("contact",contact);
+            req.setAttribute("address",address);
+            req.getRequestDispatcher("viewContact.jsp").forward(req,resp);
+
         }
     }
 
