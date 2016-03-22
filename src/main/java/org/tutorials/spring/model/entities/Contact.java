@@ -6,12 +6,12 @@ package org.tutorials.spring.model.entities;
 public class Contact {
     private long id;
     private String name;
-    private String addressId;
+    private Long addressId;
 
     public Contact() {
     }
 
-    public Contact(String name, String addressId) {
+    public Contact(String name, Long addressId) {
         this.name = name;
         this.addressId = addressId;
     }
@@ -32,11 +32,11 @@ public class Contact {
         this.name = name;
     }
 
-    public String getAddressId() {
+    public Long getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(String addressId) {
+    public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 }

@@ -19,7 +19,7 @@
     </listener>-->
     <servlet>
         <servlet-name>address book</servlet-name>
-        <servlet-class>org.tutorials.spring.servlet.HelloWorld</servlet-class>
+        <servlet-class>org.tutorials.spring.servlet.ContactListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>address book</servlet-name>

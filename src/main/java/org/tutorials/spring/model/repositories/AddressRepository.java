@@ -7,10 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,16 @@ public class AddressRepository {
     public void init() {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "CREATE TABLE IF NOT EXISTS address (id INTEGER PRIMARY KEY Auto_increment,street VARCHAR (255),city VARCHAR (255),state VARCHAR (255),zip VARCHAR (255))";
+
+            /*
+            * MySQL Query [Note : Auto_Increment]
+            * String sql = "CREATE TABLE IF NOT EXISTS address (id INTEGER PRIMARY KEY Auto_increment,street VARCHAR (255),city VARCHAR (255),state VARCHAR (255),zip VARCHAR (255))";
+            * */
+
+            /*
+            * PostgreSQL Query
+            * */
+            String sql = "CREATE TABLE IF NOT EXISTS address (id serial PRIMARY KEY,street VARCHAR (255),city VARCHAR (255),state VARCHAR (255),zip VARCHAR (255))";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.execute();
             preparedStatement.close();
@@ -83,12 +89,15 @@ public class AddressRepository {
     public void create(Address address) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO address (street,city,state,zip) VALUES (?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO address (street,city,state,zip) VALUES (?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, address.getStreet());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getState());
             preparedStatement.setString(4, address.getZip());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next())
+                address.setId(resultSet.getLong("id") );
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {

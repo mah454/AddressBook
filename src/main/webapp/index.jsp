@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>First Page</h1><br/>
-<a href="<c:url value="/hello-servlet.do"/>">Go to servlet initializer</a>
+<a href="<c:url value="/contactList.do"/>">Contact List</a>
 </body>
 </html>

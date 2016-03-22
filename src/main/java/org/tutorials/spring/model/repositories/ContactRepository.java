@@ -7,10 +7,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,16 @@ public class ContactRepository {
     public void init() {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "CREATE TABLE IF NOT EXISTS contact (id INTEGER PRIMARY KEY Auto_increment,name VARCHAR (255),address_id INTEGER ,FOREIGN KEY (address_id) REFERENCES address(id))";
+
+            /*
+            * MySQL Query [Note : Auto_Increment,Foreign key]
+            * String sql = "CREATE TABLE IF NOT EXISTS contact (id INTEGER PRIMARY KEY Auto_increment,name VARCHAR (255),address_id INTEGER ,FOREIGN KEY (address_id) REFERENCES address(id))";
+            * */
+
+            /*
+            * PostgreSQL Query
+            * */
+            String sql = "CREATE TABLE IF NOT EXISTS contact (id serial PRIMARY KEY ,name VARCHAR (255),address_id INTEGER REFERENCES address(id))";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.execute();
             preparedStatement.close();
@@ -83,10 +89,13 @@ public class ContactRepository {
     public void create(Contact contact) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO contact () VALUES (?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO contact (name,address_id) VALUES (?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, contact.getName());
-            preparedStatement.setString(2, contact.getAddressId());
+            preparedStatement.setLong(2, contact.getAddressId());
             preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next())
+                contact.setId(resultSet.getLong("id"));
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
@@ -99,7 +108,7 @@ public class ContactRepository {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE contact set name=?,address_id=?WHERE id=?");
             preparedStatement.setString(1, contact.getName());
-            preparedStatement.setString(2, contact.getAddressId());
+            preparedStatement.setLong(2, contact.getAddressId());
             preparedStatement.setLong(3, contact.getId());
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -139,7 +148,7 @@ public class ContactRepository {
         try {
             contact.setId(resultSet.getLong("id"));
             contact.setName(resultSet.getString("name"));
-            contact.setAddressId(resultSet.getString("address_id"));
+            contact.setAddressId(resultSet.getLong("address_id"));
         } catch (Exception e) {
             e.printStackTrace();
         }
