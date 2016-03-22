@@ -61,6 +61,13 @@ public class ContactServlet extends HttpServlet {
             contactRepository.update(contact);
             addressRepository.update(address);
             resp.sendRedirect("contact.do?id="+contact.getId());
+        } else if (req.getParameter("delete")!=null) {
+            long id = Long.parseLong(req.getParameter("id"));
+            Contact contact = contactRepository.find(id);
+            Address address = addressRepository.find(contact.getId());
+            contactRepository.delete(contact);
+            addressRepository.delete(address);
+            resp.sendRedirect("contacts.do");
         } else {
             super.doPost(req, resp);
         }

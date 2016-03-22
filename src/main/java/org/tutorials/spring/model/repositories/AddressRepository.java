@@ -122,11 +122,11 @@ public class AddressRepository {
         }
     }
 
-    public void delete(long id) {
+    public void delete(Address address) {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM address WHERE id=?");
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, address.getId());
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();

@@ -118,11 +118,11 @@ public class ContactRepository {
         }
     }
 
-    public void delete(long id) {
+    public void delete(Contact contact) {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM contact WHERE  id=?");
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, contact.getId());
             preparedStatement.execute();
             preparedStatement.close();
             connection.close();
