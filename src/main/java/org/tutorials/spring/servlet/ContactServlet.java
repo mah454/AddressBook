@@ -24,8 +24,9 @@ public class ContactServlet extends HttpServlet {
         } else {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getAddressId());
+            Address address = contact.getAddress();
             System.out.println(address.getCity());
+            System.out.println(address.getId());
             req.setAttribute("contact", contact);
             req.setAttribute("address", address);
             if (req.getParameter("edit") != null) {
@@ -39,33 +40,30 @@ public class ContactServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("add") != null) {
-            Address address = new Address();
-            address.setState(req.getParameter("state"));
-            address.setCity(req.getParameter("city"));
-            address.setStreet(req.getParameter("street"));
-            address.setZip(req.getParameter("zip"));
-            addressRepository.save(address);
-            Contact contact = new Contact();
-            contact.setName(req.getParameter("name"));
-            contact.setAddressId(address.getId());
-            contactRepository.save(contact);
+            Address address = new Address(req.getParameter("street"),
+                    req.getParameter("city"),
+                    req.getParameter("state"),
+                    req.getParameter("zip"));
+            address = addressRepository.save(address);
+            Contact contact = new Contact(req.getParameter("name"),address);
+            contact = contactRepository.save(contact);
             resp.sendRedirect("/contact.do?id=" + contact.getId());
         } else if (req.getParameter("edit") != null) {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getAddressId());
+            Address address = contact.getAddress();
             contact.setName(req.getParameter("name"));
             address.setState(req.getParameter("state"));
             address.setCity(req.getParameter("city"));
             address.setStreet(req.getParameter("street"));
             address.setZip(req.getParameter("zip"));
-            contactRepository.update(contact);
-            addressRepository.update(address);
+            contactRepository.save(contact);
+            addressRepository.save(address);
             resp.sendRedirect("contact.do?id="+contact.getId());
         } else if (req.getParameter("delete")!=null) {
             long id = Long.parseLong(req.getParameter("id"));
             Contact contact = contactRepository.find(id);
-            Address address = addressRepository.find(contact.getAddressId());
+            Address address = contact.getAddress();
             contactRepository.delete(contact);
             addressRepository.delete(address);
             resp.sendRedirect("contacts.do");

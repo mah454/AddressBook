@@ -11,9 +11,13 @@ public class Address {
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id ;
+    @Column
     private String street ;
+    @Column
     private String city ;
+    @Column
     private String state ;
+    @Column
     private String zip ;
 
     public Address() {

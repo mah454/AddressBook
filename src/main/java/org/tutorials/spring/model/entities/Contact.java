@@ -11,17 +11,17 @@ public class Contact {
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column
     private String name;
-
-    //TODO Relation OneToOne ...
-    private Long addressId;
+    @OneToOne
+    private Address address;
 
     public Contact() {
     }
 
-    public Contact(String name, Long addressId) {
+    public Contact(String name, Address address) {
         this.name = name;
-        this.addressId = addressId;
+        this.address = address;
     }
 
     public long getId() {
@@ -40,11 +40,11 @@ public class Contact {
         this.name = name;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

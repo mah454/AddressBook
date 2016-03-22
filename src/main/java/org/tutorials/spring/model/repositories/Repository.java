@@ -20,16 +20,11 @@ public class Repository<E> {
         return entityManager.createQuery("from " + entityClass.getSimpleName() + " order by id", entityClass).getResultList();
     }
 
-    public void save(E entity) {
+    public E save(E entity) {
         entityManager.getTransaction().begin();
-        entityManager.persist(entity);
+        entity = entityManager.merge(entity);
         entityManager.getTransaction().commit();
-    }
-
-    public void update(E entity) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(entity);
-        entityManager.getTransaction().commit();
+        return entity;
     }
 
     public void delete(E entity) {
