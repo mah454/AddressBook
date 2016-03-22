@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="<c:url value="/contactList.do"/>">Contact List</a>
+<a href="<c:url value="/contacts.do"/>">Contact List</a>
 </body>
 </html>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by mahsom on 3/21/16.
  */
-@WebServlet("/contactList.do")
+@WebServlet("/contacts.do")
 public class ContactListServlet extends HttpServlet {
     private ContactRepository contactRepository = new ContactRepository();
 
