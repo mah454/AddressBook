@@ -13,7 +13,7 @@ public class Contact {
     private long id;
     @Column
     private String name;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Address address;
 
     public Contact() {

@@ -11,6 +11,7 @@
     <input type="hidden" name="edit">
     <input type="hidden" name="id" value="${contact.id}">
     <ul>
+        <c:set var="address" value="${contact.address}"/>
         <li>Name : <input type="text" name= "name" value="${contact.name}"></li>
         <li>State : <input type="text" name="state" value="${address.state}"></li>
         <li>City : <input type="text" name="city" value="${address.city}"></li>
