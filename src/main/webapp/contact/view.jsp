@@ -15,6 +15,7 @@
 <h1>${contact.name}</h1>
 <ul>
     <c:set var="address" value="${contact.address}"/>
+    <li>${address.id}</li>
     <li>${address.state}</li>
     <li>${address.city}</li>
     <li>${address.street}</li>

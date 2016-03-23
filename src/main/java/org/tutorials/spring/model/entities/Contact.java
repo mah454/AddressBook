@@ -9,7 +9,8 @@ import javax.persistence.*;
 public class Contact {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="contact_seq")
+    @SequenceGenerator(name = "contact_seq" , sequenceName = "contact_seq")
     private long id;
     @Column
     private String name;
