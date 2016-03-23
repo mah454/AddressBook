@@ -3,15 +3,5 @@
     <persistence-unit name="addressbook" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <non-jta-data-source>java:comp/env/jdbc/addressbook</non-jta-data-source>
-        <properties>
-            <!--<property name="hibernate.show_sql" value="true"/>-->
-            <property name="hibernate.format_sql" value="true"/>
-<!--            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://172.17.0.3/addressbook"/>
-            <property name="hibernate.connection.username" value="ghasedak"/>
-            <property name="hibernate.connection.password" value="mypass"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
-        </properties>
     </persistence-unit>
 </persistence>

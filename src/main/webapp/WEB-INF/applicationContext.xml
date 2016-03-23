@@ -31,6 +31,11 @@
                 <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
             </bean>
         </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
 
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager"/>
