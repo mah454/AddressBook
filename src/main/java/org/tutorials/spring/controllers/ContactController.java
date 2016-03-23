@@ -43,20 +43,21 @@ public class ContactController {
         return "contact/view";
     }
 
+    @RequestMapping(value = "contact.do", params = "add" ,method = RequestMethod.POST)
+    public String postAddContact(@RequestParam String name ,
+                               @RequestParam String state,
+                               @RequestParam String city,
+                               @RequestParam String street,
+                               @RequestParam String zip) {
+        Address address = new Address(street,city,state,zip);
+        Contact contact = new Contact(name,address);
+        contactRepository.save(contact);
+        return "redirect:contact.do?id="+contact.getId();
+    }
+    
     @RequestMapping(value = "contact.do", method = RequestMethod.POST)
     public void postContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("add") != null) {
-            /*
-            * Add new Contact
-            * */
-            Address address = new Address(request.getParameter("state"),
-                    request.getParameter("city"),
-                    request.getParameter("street"),
-                    request.getParameter("zip"));
-            Contact contact = new Contact(request.getParameter("name"), address);
-            contactRepository.save(contact);
-            response.sendRedirect("contact.do?id=" + contact.getId());
-        } else if (request.getParameter("edit") != null) {
+        if (request.getParameter("edit") != null) {
             /*
             * Edit Contact
             * */
