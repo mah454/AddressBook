@@ -72,8 +72,7 @@ public class PersonController {
 
     @RequestMapping(value = "person.do", params = "delete", method = RequestMethod.POST)
     public String postPerson(@RequestParam long id) throws ServletException, IOException {
-        Person person = personRepository.findOne(id);
-        personRepository.delete(person);
+        personRepository.delete(id);
         return "redirect:contacts.do";
     }
 }

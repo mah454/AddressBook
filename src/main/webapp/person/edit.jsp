@@ -18,12 +18,12 @@
         <li>street : <input type="text" name="street" value="${address.street}"></li>
         <li>zip : <input type="text" name="zip" value="${address.zip}"></li>
     </ul>
-    <input type="submit" value="edit">
+    <input type="submit" value="Edit">
 </form>
 <form action="/person.do" method="post">
     <input type="hidden" name="delete">
     <input type="hidden" name="id" value="${person.id}">
-    <input type="submit" value="delete">
+    <input type="submit" value="Delete">
 </form>
 <a href="contacts.do">Back to contact list</a>
 </body>

@@ -21,10 +21,10 @@
     <c:forEach var="contact" items="${contacts}">
         <tr>
             <th><c:out value="${contact.id}"/></th>
-            <th><a href="/person.do?id=${contact.id}"><c:out value="${contact.name}"/></a></th>
+            <th><a href="/person.do?id=${contact.id}"><c:out value="${contact.name}"/></a></th><%--FIXME : url problem --%>
         </tr>
     </c:forEach>
 </table>
-<a href="/person.do?add">Add new person</a>
+<a href="/person.do?add">Add new person</a> | <a href="/company.do?add">Add new company</a>
 </body>
 </html>
