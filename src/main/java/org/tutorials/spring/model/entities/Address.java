@@ -6,12 +6,8 @@ import javax.persistence.*;
  * Created by mahsom on 3/21/16.
  */
 @Entity
-public class Address {
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "address_seq")
-    @SequenceGenerator(name = "address_seq",sequenceName = "address_seq")
-    private long id ;
+@SequenceGenerator(name = "default_seq",sequenceName = "address_seq")
+public class Address extends BaseEntity{
     @Column
     private String street ;
     @Column
@@ -29,14 +25,6 @@ public class Address {
         this.city = city;
         this.state = state;
         this.zip = zip;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getStreet() {

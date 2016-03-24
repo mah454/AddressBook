@@ -7,12 +7,9 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Contact {
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="contact_seq")
-    @SequenceGenerator(name = "contact_seq" , sequenceName = "contact_seq")
-    private long id;
+@SequenceGenerator(name = "default_seq",sequenceName = "contact_seq")
+public class Contact extends BaseEntity{
+
     @Column
     private String name;
 
@@ -22,14 +19,6 @@ public class Contact {
 
     public Contact(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

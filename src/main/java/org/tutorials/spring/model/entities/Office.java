@@ -6,12 +6,8 @@ import javax.persistence.*;
  * Created by mahsom on 3/23/16.
  */
 @Entity
-public class Office {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "office_seq")
-    @SequenceGenerator(name = "office_seq",sequenceName = "office_seq")
-    private long id;
+@SequenceGenerator(name = "default_seq", sequenceName = "office_seq")
+public class Office extends BaseEntity {
 
     @Column
     private String name;
@@ -32,14 +28,6 @@ public class Office {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Address getAddress() {
