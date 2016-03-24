@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by mahsom on 3/21/16.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Contact {
     @Id
     @Column
@@ -14,15 +15,13 @@ public class Contact {
     private long id;
     @Column
     private String name;
-    @OneToOne (cascade = CascadeType.ALL)
-    private Address address;
+
 
     public Contact() {
     }
 
-    public Contact(String name, Address address) {
+    public Contact(String name) {
         this.name = name;
-        this.address = address;
     }
 
     public long getId() {
@@ -39,13 +38,5 @@ public class Contact {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

@@ -7,12 +7,12 @@
 <body>
 <h1>Add Contact :</h1>
 
-<form action="<c:url value="/contact.do"/>" method="post">
+<form action="<c:url value="/person.do"/>" method="post">
     <input type="hidden" name="edit">
-    <input type="hidden" name="id" value="${contact.id}">
+    <input type="hidden" name="id" value="${person.id}">
     <ul>
-        <c:set var="address" value="${contact.address}"/>
-        <li>Name : <input type="text" name= "name" value="${contact.name}"></li>
+        <c:set var="address" value="${person.address}"/>
+        <li>Name : <input type="text" name= "name" value="${person.name}"></li>
         <li>State : <input type="text" name="state" value="${address.state}"></li>
         <li>City : <input type="text" name="city" value="${address.city}"></li>
         <li>street : <input type="text" name="street" value="${address.street}"></li>
@@ -20,9 +20,9 @@
     </ul>
     <input type="submit" value="edit">
 </form>
-<form action="/contact.do" method="post">
+<form action="/person.do" method="post">
     <input type="hidden" name="delete">
-    <input type="hidden" name="id" value="${contact.id}">
+    <input type="hidden" name="id" value="${person.id}">
     <input type="submit" value="delete">
 </form>
 <a href="contacts.do">Back to contact list</a>

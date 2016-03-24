@@ -21,10 +21,10 @@
     <c:forEach var="contact" items="${contacts}">
         <tr>
             <th><c:out value="${contact.id}"/></th>
-            <th><a href="/contact.do?id=${contact.id}"><c:out value="${contact.name}"/></a></th>
+            <th><a href="/person.do?id=${contact.id}"><c:out value="${contact.name}"/></a></th>
         </tr>
     </c:forEach>
 </table>
-<a href="contact.do?add">Add new contact</a>
+<a href="/person.do?add">Add new person</a>
 </body>
 </html>

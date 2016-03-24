@@ -9,18 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>View Contact</title>
+    <title>${person.name}</title>
 </head>
 <body>
-<h1>${contact.name}</h1>
+<h1>${person.name}</h1>
 <ul>
-    <c:set var="address" value="${contact.address}"/>
+    <c:set var="address" value="${person.address}"/>
     <li>${address.id}</li>
     <li>${address.state}</li>
     <li>${address.city}</li>
     <li>${address.street}</li>
     <li>${address.zip}</li>
 </ul>
-<a href="/contact.do?edit&id=${contact.id}">Edit Contact</a> | <a href="/contacts.do">Back to contact list</a>
+<a href="/person.do?edit&id=${person.id}">Edit Contact</a> | <a href="/contacts.do">Back to contact list</a>
 </body>
 </html>

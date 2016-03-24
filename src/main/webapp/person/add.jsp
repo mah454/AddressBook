@@ -7,7 +7,7 @@
 <body>
 <h1>Add Contact :</h1>
 
-<form action="<c:url value="/contact.do"/>" method="post">
+<form action="<c:url value="/person.do"/>" method="post">
     <input type="hidden" name="add">
     <ul>
         <li>Name : <input type="text" name="name"></li>
