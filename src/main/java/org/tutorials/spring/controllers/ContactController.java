@@ -1,6 +1,7 @@
 package org.tutorials.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class ContactController {
 
     @RequestMapping(value = "contacts.do", method = RequestMethod.GET)
     public String getContactList(Model model) throws ServletException, IOException {
-        model.addAttribute("contacts", contactRepository.findAll());
+        model.addAttribute("contacts", contactRepository.findAll(new Sort("id")));
         return "contact/list";
     }
 }

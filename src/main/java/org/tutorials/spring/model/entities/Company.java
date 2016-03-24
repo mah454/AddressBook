@@ -18,7 +18,13 @@ public class Company extends Contact {
         this.offices = offices;
     }
 
-    public Company() {}
+    public Company() {
+    }
+
+    @Override
+    public String getUrl() {
+        return "company.do?id=" + getId();
+    }
 
     public Set<Office> getOffices() {
         return offices;
