@@ -16,11 +16,6 @@ public class Person extends Contact {
     public Person() {
     }
 
-    @Override
-    public String getUrl() {
-        return "person.do?id=" + getId();
-    }
-
     public Person(String name, Address address) {
         super(name);
         this.address = address;

@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Company extends Contact {
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private Set<Office> offices;
 
     public Company(String name, Set<Office> offices) {
@@ -19,11 +19,6 @@ public class Company extends Contact {
     }
 
     public Company() {
-    }
-
-    @Override
-    public String getUrl() {
-        return "company.do?id=" + getId();
     }
 
     public Set<Office> getOffices() {

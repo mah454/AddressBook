@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "default_seq", sequenceName = "contact_seq")
-public abstract class Contact extends BaseEntity {
+public class Contact extends UrlEntity {
 
     @Column
     private String name;
@@ -27,6 +27,4 @@ public abstract class Contact extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    public abstract String getUrl();
 }

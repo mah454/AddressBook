@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @SequenceGenerator(name = "default_seq", sequenceName = "office_seq")
-public class Office extends BaseEntity {
+public class Office extends UrlEntity {
 
     @Column
     private String name;
@@ -15,11 +15,22 @@ public class Office extends BaseEntity {
     @OneToOne
     private Address address;
 
+    @ManyToOne
+    private Company company;
+
     public Office() {
     }
 
     public Office(Address address) {
         this.address = address;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getName() {
