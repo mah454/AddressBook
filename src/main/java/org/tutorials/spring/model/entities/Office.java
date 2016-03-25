@@ -21,8 +21,9 @@ public class Office extends UrlEntity {
     public Office() {
     }
 
-    public Office(Address address) {
+    public Office(Address address, Company company) {
         this.address = address;
+        this.company = company;
     }
 
     public Company getCompany() {

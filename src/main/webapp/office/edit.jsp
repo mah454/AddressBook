@@ -1,22 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mahsom
-  Date: 3/24/16
-  Time: 7:48 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>${office.name}</title>
+    <title>Edit Office Page</title>
 </head>
 <body>
-<h1>${office.name}</h1>
+<h1>Edit Office :</h1>
 
-<form action="/office.do" method="post">
+<form action="<c:url value="/office.do"/>" method="post">
     <input type="hidden" name="edit">
     <input type="hidden" name="id" value="${office.id}">
-    <input type="text" name="name" value="${office.name}">
+    <ul>
+        <c:set var="address" value="${office.address}"/>
+        <li>Name : <input type="text" name= "name" value="${office.name}"></li>
+        <li>State : <input type="text" name="state" value="${office.state}"></li>
+        <li>City : <input type="text" name="city" value="${office.city}"></li>
+        <li>street : <input type="text" name="street" value="${office.street}"></li>
+        <li>zip : <input type="text" name="zip" value="${office.zip}"></li>
+    </ul>
     <input type="submit" value="Edit">
 </form>
 <form action="/office.do" method="post">
@@ -24,6 +25,6 @@
     <input type="hidden" name="id" value="${office.id}">
     <input type="submit" value="Delete">
 </form>
-<a href="/office.do">Back to contact list</a>
+<a href="${office.company.url}">Back to ${office.company.name}</a>
 </body>
 </html>

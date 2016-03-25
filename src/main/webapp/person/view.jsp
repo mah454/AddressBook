@@ -9,18 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>${person.name}</title>
+    <title>${office.name}</title>
 </head>
 <body>
-<h1>${person.name}</h1>
+<h1>${office.name}</h1>
 <ul>
-    <c:set var="address" value="${person.address}"/>
+    <c:set var="address" value="${office.address}"/>
     <li>${address.id}</li>
     <li>${address.state}</li>
     <li>${address.city}</li>
     <li>${address.street}</li>
     <li>${address.zip}</li>
 </ul>
-<a href="/person.do?edit&id=${person.id}">Edit Contact</a> | <a href="/contacts.do">Back to contact list</a>
+<a href="${office.url}&edit">Edit Office</a> | <a href="${office.company.url}">Back to ${office.company.name}</a>
 </body>
 </html>

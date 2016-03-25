@@ -1,23 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mahsom
-  Date: 3/24/16
-  Time: 7:48 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>${office.name}</title>
+    <title>Add Office Page</title>
 </head>
 <body>
-<h1>${office.name}</h1>
+<h1>Add Office :</h1>
 
-<form action="/office.do" method="post">
+<form action="<c:url value="/office.do"/>" method="post">
     <input type="hidden" name="add">
-    <input type="text" name="name">
-    <input type="submit" value="Add">
+    <input type="hidden" name="company_id" value="${company.id}">
+    <ul>
+        <li>Name : <input type="text" name="name"></li>
+        <li>State : <input type="text" name="state"></li>
+        <li>City : <input type="text" name="city"></li>
+        <li>street : <input type="text" name="street"></li>
+        <li>zip : <input type="text" name="zip"></li>
+    </ul>
+    <input type="submit" value="add">
 </form>
-<a href="/office.do">Back to contact list</a>
+<a href="${company.url}">Back to ${company.name}</a>
 </body>
 </html>

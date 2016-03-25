@@ -2,10 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Contact Page</title>
+    <title>Edit Contact Page</title>
 </head>
 <body>
-<h1>Add Contact :</h1>
+<h1>Edit Contact :</h1>
 
 <form action="<c:url value="/person.do"/>" method="post">
     <input type="hidden" name="edit">
