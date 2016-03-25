@@ -21,6 +21,6 @@
     <li>${address.street}</li>
     <li>${address.zip}</li>
 </ul>
-<a href="/office.do?edit&id=${office.id}">Edit Contact</a> | <a href="/contacts.do">Back to contact list</a>
+<a href="/office.do?edit&id=${office.id}">Edit Office</a> | <a href="${office.company.url}">Back to ${office.company.name}</a>
 </body>
 </html>

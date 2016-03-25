@@ -13,10 +13,10 @@
     <ul>
         <c:set var="address" value="${office.address}"/>
         <li>Name : <input type="text" name= "name" value="${office.name}"></li>
-        <li>State : <input type="text" name="state" value="${office.state}"></li>
-        <li>City : <input type="text" name="city" value="${office.city}"></li>
-        <li>street : <input type="text" name="street" value="${office.street}"></li>
-        <li>zip : <input type="text" name="zip" value="${office.zip}"></li>
+        <li>State : <input type="text" name="state" value="${office.address.state}"></li>
+        <li>City : <input type="text" name="city" value="${office.address.city}"></li>
+        <li>street : <input type="text" name="street" value="${office.address.street}"></li>
+        <li>zip : <input type="text" name="zip" value="${office.address.zip}"></li>
     </ul>
     <input type="submit" value="Edit">
 </form>

@@ -12,7 +12,7 @@ public class Office extends UrlEntity {
     @Column
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @ManyToOne
@@ -21,7 +21,8 @@ public class Office extends UrlEntity {
     public Office() {
     }
 
-    public Office(Address address, Company company) {
+    public Office(String name, Address address, Company company) {
+        this.name = name;
         this.address = address;
         this.company = company;
     }

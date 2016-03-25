@@ -3,7 +3,6 @@ package org.tutorials.spring.model.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-
 /**
  * Created by mahsom on 3/23/16.
  */

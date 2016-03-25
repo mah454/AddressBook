@@ -19,7 +19,7 @@
     </c:forEach>
 </ul>
 <a href="/company.do?edit&id=${company.id}">Edit company</a> |
-<a href="office?add&company_id=?${company.id}">Add office</a> |
+<a href="/office.do?add&company_id=${company.id}">Add office</a> |
 <a href="/contacts.do">Back to contact list</a>
 </body>
 </html>
