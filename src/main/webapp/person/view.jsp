@@ -20,6 +20,8 @@
     <li>${address.city}</li>
     <li>${address.street}</li>
     <li>${address.zip}</li>
+    <li>Manager : ${person.manager.name}</li>
+    <li>Employer : ${person.employer.name}</li>
 </ul>
 <a href="${person.url}&edit">Edit Person</a> | <a href="/contacts.do">Back to contact list</a>
 </body>

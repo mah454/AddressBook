@@ -1,7 +1,6 @@
 package org.tutorials.spring.model.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
 @Entity
 public class Company extends Contact {
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",orphanRemoval = true)
     private List<Office> offices;
 
     public Company(String name, List<Office> offices) {

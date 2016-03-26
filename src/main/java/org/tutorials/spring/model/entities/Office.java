@@ -1,5 +1,7 @@
 package org.tutorials.spring.model.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 /**
@@ -9,13 +11,14 @@ import javax.persistence.*;
 @SequenceGenerator(name = "default_seq", sequenceName = "office_seq")
 public class Office extends UrlEntity {
 
-    @Column
+    @Column(nullable = false)
+    @NotBlank
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(optional = false,cascade = CascadeType.ALL)
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Company company;
 
     public Office() {

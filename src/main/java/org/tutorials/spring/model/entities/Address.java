@@ -1,5 +1,7 @@
 package org.tutorials.spring.model.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 /**
@@ -8,13 +10,21 @@ import javax.persistence.*;
 @Entity
 @SequenceGenerator(name = "default_seq",sequenceName = "address_seq")
 public class Address extends BaseEntity{
-    @Column
+
+    @Column(nullable = false)
+    @NotBlank
     private String street ;
-    @Column
+
+    @Column(nullable = false)
+    @NotBlank
     private String city ;
-    @Column
+
+    @Column(nullable = false)
+    @NotBlank
     private String state ;
-    @Column
+
+    @Column(nullable = false)
+    @NotBlank
     private String zip ;
 
     public Address() {

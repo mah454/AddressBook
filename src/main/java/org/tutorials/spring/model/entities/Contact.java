@@ -1,5 +1,7 @@
 package org.tutorials.spring.model.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 /**
@@ -10,7 +12,8 @@ import javax.persistence.*;
 @SequenceGenerator(name = "default_seq", sequenceName = "contact_seq")
 public class Contact extends UrlEntity {
 
-    @Column
+    @Column(nullable = false)
+    @NotBlank
     private String name;
 
     public Contact() {
