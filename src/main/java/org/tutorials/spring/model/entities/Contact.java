@@ -7,6 +7,7 @@ import javax.persistence.*;
 /**
  * Created by mahsom on 3/21/16.
  */
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "default_seq", sequenceName = "contact_seq")

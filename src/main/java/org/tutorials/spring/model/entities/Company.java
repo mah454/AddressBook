@@ -1,5 +1,8 @@
 package org.tutorials.spring.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -10,7 +13,8 @@ import java.util.List;
 @Entity
 public class Company extends Contact {
 
-    @OneToMany(mappedBy = "company",orphanRemoval = true)
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonBackReference
     private List<Office> offices;
 
     public Company(String name, List<Office> offices) {

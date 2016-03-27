@@ -1,5 +1,6 @@
 package org.tutorials.spring.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -16,9 +17,11 @@ public class Office extends UrlEntity {
     private String name;
 
     @OneToOne(optional = false,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Address address;
 
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private Company company;
 
     public Office() {

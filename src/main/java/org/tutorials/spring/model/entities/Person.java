@@ -1,5 +1,8 @@
 package org.tutorials.spring.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -15,9 +18,11 @@ public class Person extends Contact {
     private Address address;
 
     @ManyToOne
+    @JsonManagedReference
     private Person manager;
 
     @ManyToOne
+    @JsonManagedReference
     private Company employer;
 
     public Person() {
